@@ -1,0 +1,10 @@
+# _config.yml
+
+# Site settings
+title: Cross domain tracking
+description: Cross domain tracking
+baseurl: "/test" # the subpath of your site, e.g. /blog or empty.
+
+# Build settings
+markdown: kramdown
+theme: minima
