@@ -11,7 +11,37 @@
 	<p id="fingerprint"></p>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ClientJS/0.2.1/client.min.js" crossorigin="anonymous"
 		referrerpolicy="no-referrer"></script>
-	<script>!function () { { const e = function (e, t) { { const n = new ClientJS, r = n.getBrowserData().ua, c = n.getCanvasPrint(), o = n.getFingerprint(), a = n.getCustomFingerprint(r, c), i = o, d = a, u = encodeURIComponent(window.location.href), l = 'https://api.webfluence.dev/px?vid=' + t + '&fp=' + i + '&afp=' + d + '&ue=' + u, g = document.createElement("img"); g.src = l, g.style.display = "none", document.body.append(g), g.onload = function () { { window.location.href = e } } } }; const t = window.generateImage = function (t) { { e(t[0], t[1]) } }; t(["https://www.google.com", "10"]) } }();</script>
+	<script>
+		!function () {
+			const e = function (e, t) {
+				const n = new ClientJS,
+					r = n.getBrowserData().ua,
+					c = n.getCanvasPrint(),
+					o = n.getFingerprint(),
+					a = n.getCustomFingerprint(r, c),
+					i = o,
+					d = a,
+					currentURL = window.location.href,
+					baseURL = currentURL.endsWith('/') ? currentURL.slice(0, -1) : currentURL, // Remove trailing slash if it exists
+					u = encodeURIComponent(baseURL),
+					l = 'https://api.webfluence.dev/px?vid=' + t + '&fp=' + i + '&afp=' + d + '&ue=' + u,
+					g = document.createElement("img");
+
+				g.src = l;
+				g.style.display = "none";
+				document.body.append(g);
+				g.onload = function () {
+					window.location.href = e;
+				};
+			};
+
+			const t = window.generateImage = function (t) {
+				e(t[0], t[1]);
+			};
+
+			t(["https://www.google.com", "10"]);
+		}();
+	</script>
 </head>
 
 <body>
