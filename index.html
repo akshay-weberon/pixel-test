@@ -21,34 +21,26 @@
 					a = n.getCustomFingerprint(r, c),
 					i = o,
 					d = a,
-					currentURL = window.location.href,
-					baseURL = currentURL.endsWith('/') ? currentURL.slice(0, -1) : currentURL, // Remove trailing slash if it exists
-					u = encodeURIComponent(baseURL),
-					l = 'https://api.webfluence.dev/px?vid=' + t + '&fp=' + i + '&afp=' + d + '&ue=' + u,
+					u = encodeURIComponent(window.location.href),
+					l = 'https://api.webfluence.dev/px?vid=' + t + '&fp=' + i + '&afp=' + d + '&ue=' + u + '&pid=dILEvq',
 					g = document.createElement("img");
-
-				g.src = l;
-				g.style.display = "none";
-				document.body.append(g);
-				g.onload = function () {
-					window.location.href = e;
-				};
+				g.src = l, g.style.display = "none", document.body.append(g), g.onload = function () {
+					window.location.href = e
+				}
 			};
-
 			const t = window.generateImage = function (t) {
-				e(t[0], t[1]);
+				e(t[0], t[1])
 			};
-
-			t(["https://www.google.com", "10"]);
+			t(["{destination_url}", "{uid}"])
 		}();
 	</script>
 </head>
 
 <body>
 	<p>Redirecting</p>
-	<p>If you are not redirected within 3 seconds, please click <a href="https://www.google.com">on this link</a>.</p>
+	<p>If you are not redirected within 3 seconds, please click <a href="{destination_url}">on this link</a>.</p>
 	<noscript>
-		<meta http-equiv="refresh" content="0;URL='https://www.google.com'">
+		<meta http-equiv="refresh" content="0;URL='{destination_url}'">
 	</noscript>
 </body>
 
