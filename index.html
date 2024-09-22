@@ -3,45 +3,37 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Redirecting</title>
-	<link rel="icon"
-		href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC">
-	<p id="fingerprint"></p>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/ClientJS/0.2.1/client.min.js" crossorigin="anonymous"
-		referrerpolicy="no-referrer"></script>
-	<script>
-		!function () {
-			const e = function (e, t) {
-				const n = new ClientJS,
-					r = n.getBrowserData().ua,
-					c = n.getCanvasPrint(),
-					o = n.getFingerprint(),
-					a = n.getCustomFingerprint(r, c),
-					i = o,
-					d = a,
-					u = encodeURIComponent(window.location.href),
-					l = 'https://shorturl.weberon.org/px?vid=' + t + '&fp=' + i + '&afp=' + d + '&ue=' + u + '&pid=dILEvq',
-					g = document.createElement("img");
-				g.src = l, g.style.display = "none", document.body.append(g), g.onload = function () {
-					window.location.href = e
-				}
-			};
-			const t = window.generateImage = function (t) {
-				e(t[0], t[1])
-			};
-			t(["https://weberealty.thrivebrokers.com", "{uid}"])
-		}();
+	<script src="https://pixel.prsnl.ink/client.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>>
 	</script>
+	<script>
+		const dispatchTrackingPxRequest = () => {
+			let fp = "NA";
+			let afp = "NA";
+			let pixelUrl = undefined;
+			const urlEncoded = encodeURIComponent(window.location.href);
+
+			if (window.ClientJS) {
+				console.log("ClientJS Script is fetched and available");
+				const client = new ClientJS();
+				const ua = client.getBrowserData().ua;
+				const canvasPrint = client.getCanvasPrint();
+				const fingerprint = client.getFingerprint();
+				const customFingerprint = client.getCustomFingerprint(ua, canvasPrint);
+				fp = fingerprint;
+				afp = customFingerprint;
+			} else {
+				console.log("ClientJS Script is not fetched and is unavailable");
+			}
+			pixelUrl = `https://www.developer15-prsnl.ink/px?vid=dummy&fp=${fp}&afp=${afp}&ue=${urlEncoded}&pid=nljtHu`;
+		}
+		dispatchTrackingPxRequest()
+	</script>
+	<title>Customer pixel test</title>
 </head>
 
 <body>
-	<p>Redirecting</p>
-	<p>If you are not redirected within 3 seconds, please click <a href="{destination_url}">on this link</a>.</p>
-	<noscript>
-		<meta http-equiv="refresh" content="0;URL='{destination_url}'">
-	</noscript>
+	<p>This is a GitHub Pages page hosted for testing customer-based Pixel ID</p>
 </body>
 
 </html>
