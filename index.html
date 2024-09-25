@@ -1,50 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://pixel.prsnl.ink/client.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>>
-	</script>
-	<script>
-const dispatchTrackingPxRequest = () => {
-    let fp = "NA";
-    let afp = "NA";
-    let pixelUrl = undefined;
-    const urlEncoded = encodeURIComponent(window.location.href);
-
-    if (window.ClientJS) {
-        console.log("ClientJS Script is fetched and available");
-        const client = new ClientJS();
-        const ua = client.getBrowserData().ua;
-        const canvasPrint = client.getCanvasPrint();
-        const fingerprint = client.getFingerprint();
-        const customFingerprint = client.getCustomFingerprint(ua, canvasPrint);
-        fp = fingerprint;
-        afp = customFingerprint;
-    } else {
-        console.log("ClientJS Script is not fetched and is unavailable");
-    }
-
-    // Build the pixel URL
-    pixelUrl = `https://developer15.prsnl.ink/px?vid=dummy&fp=${fp}&afp=${afp}&ue=${urlEncoded}&pid=nljtHu&cid=JQR3`;
-
-    // Send the request
-    fetch(pixelUrl, {
-        method: 'GET',
-        mode: 'cors'
-    })
-    .then(response => console.log("Request sent successfully:", response))
-    .catch(error => console.error("Request failed:", error));
-};
-
-dispatchTrackingPxRequest();
-	</script>
-	<title>Customer pixel test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Device and Browser Fingerprinting</title>
+  <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs/dist/fp.min.js" integrity="sha256-H1vA5hneQEk/ptZJcjSBDX35XJXAFTDIbAfJpP989fg=" crossorigin="anonymous"></script>
 </head>
-
 <body>
-	<p>This is a GitHub pages page hosted for testing customer-based Pixel ID</p>
-</body>
 
+  <h1>Device and Browser Fingerprint</h1>
+
+  <p id="fingerprint-result">Loading fingerprint...</p>
+
+  <script type="text/javascript">
+    // Wait for the FingerprintJS library to load
+    FingerprintJS.load().then(function(fp) {
+      // Get the visitor identifier
+      fp.get().then(function(result) {
+        // The fingerprint is available here
+        var visitorId = result.visitorId;
+
+        // Display the fingerprint
+        document.getElementById('fingerprint-result').textContent = 'Visitor ID: ' + visitorId;
+
+        // Optional: log additional data if you want to see what data is collected
+        console.log(result.components); // Detailed fingerprint components like canvas, webgl, etc.
+      });
+    });
+  </script>
+
+</body>
 </html>
